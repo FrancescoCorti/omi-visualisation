@@ -1,0 +1,9 @@
+.venv_website_housing/
+
+.vscode/
+__pycache__/
+documents/
+datasets/
+data_origin/
+
+notes.md
