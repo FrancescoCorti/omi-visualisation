@@ -29,7 +29,14 @@ def normalize_name(name):
     
     name = str(name)
     name = name.strip()
-    name = name.translate(str.maketrans('', '', string.punctuation))
+    
+    # normalize apostrophes
+    name = name.replace("’", "'")
+    
+    # remove punctuation except apostrophe
+    punctuation = string.punctuation.replace("'", "")
+    name = name.translate(str.maketrans('', '', punctuation))
+    
     name = re.sub(r"\s+", " ", name)
     name = unicodedata.normalize("NFKD", name)
     name = name.encode("ascii", "ignore").decode("utf-8")
