@@ -140,6 +140,8 @@ def update_chart(reg, prov, mun, zone, prop_type, condition):
         .sort_values('year_semester')
     )
 
+    plot_df['buy_mean'] = (plot_df['buy_max'] + plot_df['buy_min'])/2
+
     if plot_df.empty:
         return go.Figure().add_annotation(text="No data for current selection",
                                           showarrow=False, font_size=16)
@@ -155,6 +157,9 @@ def update_chart(reg, prov, mun, zone, prop_type, condition):
         go.Scatter(x=x, y=plot_df['buy_max'], mode='lines', name='buy_max',
                    line=dict(color='tomato', width=2),
                    hovertemplate='Max. buying price: %{y:,.0f}<extra></extra>'),
+        go.Scatter(x=x, y=plot_df['buy_mean'], mode='lines', name='buy_mean',
+                   line=dict(color='springgreen', width=2),
+                   hovertemplate='Mean. buying price: %{y:,.0f}<extra></extra>'),
         go.Scatter(x=x, y=plot_df['buy_min'], mode='lines', name='buy_min',
                    line=dict(color='steelblue', width=2),
                    hovertemplate='Min. buying price: %{y:,.0f}<extra></extra>'),
